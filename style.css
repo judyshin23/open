@@ -1,0 +1,472 @@
+/* =========================================
+   🎨 전체 테마 색깔/폰트 설정 (여기만 바꿔도 분위기 확 변함)
+   ========================================= */
+:root {
+  /* 배경 그라데이션 색 */
+  --bg-cream: #fdf7ec;   /* 중앙 쪽 크림색 */
+  --bg-green: #d9f1df;   /* 바깥 파스텔 그린 */
+  --bg-gold: #f8e3b0;    /* 살짝 골드톤 */
+
+  /* 클로버, 버튼 등 포인트 컬러 */
+  --clover-green: #6bbf7a;
+  --clover-dark: #3c7a4a;
+
+  /* 글자색 */
+  --text-main: #3a4135;   /* 본문 기본 글자 */
+  --text-muted: #6c7564;  /* 부제, 설명 글자 */
+  --text-gold: #c79b3d;   /* 힐링 문장 강조 */
+
+  /* 카드 배경/테두리 */
+  --card-bg: rgba(255, 255, 255, 0.78);
+  --card-border: #d3e8d5;
+
+  /* 버튼 색 */
+  --btn-bg: #6bbf7a;
+  --btn-bg-hover: #5aa66a;
+  --btn-text: #ffffff;
+
+  /* 그림자 */
+  --soft-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+
+  /* 폰트 (원하면 여기 폰트 이름 바꿔도 됨) */
+  --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-handwriting: "Nanum Pen Script", cursive; /* 제목용 손글씨 느낌 */
+}
+
+/* =========================================
+   기본 스타일 세팅 (마진 제거 등)
+   ========================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* 🔹 전체 배경 & 가운데 정렬 */
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center; /* 가로 가운데 */
+  align-items: center;     /* 세로 가운데 */
+  padding: 24px;
+  font-family: var(--font-main);
+  color: var(--text-main);
+  /* 포근한 그라데이션 배경 */
+  background: radial-gradient(circle at 50% 30%,
+    var(--bg-cream) 0%,
+    var(--bg-gold) 35%,
+    var(--bg-green) 100%
+  );
+}
+
+/* 🔹 페이지 전체를 감싸는 박스 (노트/다이어리 느낌) */
+.page-wrapper {
+  width: 100%;
+  max-width: 960px;         /* 페이지 가로 최대 폭 */
+  min-height: 80vh;
+  background: var(--card-bg);
+  border-radius: 24px;
+  box-shadow: var(--soft-shadow);
+  display: flex;
+  flex-direction: column;
+  padding: 32px 32px 24px;
+  backdrop-filter: blur(8px); /* 유리 느낌 (지원 브라우저에서만) */
+}
+
+/* =========================================
+   HEADER (제목, 부제)
+   ========================================= */
+.site-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+/* 메인 제목 (손글씨 느낌 폰트 사용) */
+.site-title {
+  font-family: var(--font-handwriting);
+  font-size: 2.4rem;
+  margin: 0 0 8px;
+  color: var(--clover-dark);
+}
+
+/* 부제 문장 */
+.site-subtitle {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* 메인 영역 전체(클로버 + 노래 카드들) */
+.site-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* =========================================
+   클로버 섹션
+   ========================================= */
+.clover-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 8px 8px;
+}
+
+/* 클로버가 들어가는 영역 (위에 떠 있는 느낌) */
+.clover-wrapper {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 네잎클로버 전체 (잎+줄기) */
+.clover {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  animation: clover-breathe 4s ease-in-out infinite; /* 숨 쉬는 듯한 애니메이션 */
+}
+
+/* 잎 4개 */
+.clover::before {
+  content: "";
+  position: absolute;
+  width: 52px;
+  height: 52px;
+  background: radial-gradient(circle at 30% 30%, #c9f3cd, var(--clover-green));
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* box-shadow로 네 방향에 잎 복제 */
+  box-shadow:
+    -36px 0 0 0 #6ecc7b,
+    36px 0 0 0 #6ecc7b,
+    0 -36px 0 0 #6ecc7b,
+    0 36px 0 0 #6ecc7b;
+}
+
+/* 줄기 */
+.clover::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 70px;
+  background: linear-gradient(to bottom, var(--clover-green), var(--clover-dark));
+  border-radius: 999px;
+  top: 60%;
+  left: 52%;
+  transform: translateX(-50%) rotate(22deg);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* 클로버 숨쉬기 애니메이션 */
+@keyframes clover-breathe {
+  0% {
+    transform: scale(1) rotate(-2deg);
+  }
+  50% {
+    transform: scale(1.04) rotate(2deg);
+  }
+  100% {
+    transform: scale(1) rotate(-2deg);
+  }
+}
+
+/* 마우스 올렸을 때 살짝 빛나는 효과 */
+.clover-wrapper:hover .clover {
+  filter: brightness(1.05);
+  transform: scale(1.03);
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+/* 힐링 문장 영역 */
+.healing-message {
+  text-align: center;
+  padding: 4px 16px 0;
+}
+
+.healing-text {
+  font-size: 1rem;
+  color: var(--text-gold);
+  letter-spacing: 0.04em;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+  transition: letter-spacing 0.3s ease, text-shadow 0.3s ease;
+}
+
+/* 힐링 문장 hover 시 살짝 반짝임 */
+.healing-text:hover {
+  letter-spacing: 0.08em;
+  text-shadow: 0 0 14px rgba(255, 255, 255, 0.9);
+}
+
+/* =========================================
+   노래 카드 전체 레이아웃
+   ========================================= */
+
+/* 두 곡 카드 그리드 (큰 화면에서는 2열) */
+.songs-section {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+/* 각 노래 카드 스타일 */
+.song-card {
+  background: var(--card-bg);
+  border-radius: 20px;
+  border: 1px solid var(--card-border);
+  padding: 16px 16px 20px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+}
+
+/* 카드 hover 시 살짝 떠오르는 느낌 */
+.song-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+  border-color: var(--clover-green);
+}
+
+/* 카드 오른쪽 위 작은 클로버 아이콘 */
+.song-card::before {
+  content: "🍀";
+  position: absolute;
+  right: 12px;
+  top: 10px;
+  font-size: 1.1rem;
+  opacity: 0.8;
+}
+
+/* 카드 상단: 썸네일 + 제목/가수 */
+.song-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* 썸네일 이미지 크기/모양 */
+.song-thumbnail {
+  width: 82px;
+  height: 82px;
+  border-radius: 18px;
+  object-fit: cover;
+  flex-shrink: 0;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+/* 제목/가수 묶음 */
+.song-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* 곡 제목 */
+.song-title {
+  font-size: 1.2rem;
+  margin: 0;
+  color: var(--clover-dark);
+}
+
+/* 가수 이름 */
+.song-artist {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* 내가 쓴 노래 소개 문단 */
+.song-intro {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--text-main);
+  padding-top: 4px;
+}
+
+/* =========================================
+   가사 박스 (lyrics-box)
+   ========================================= */
+.lyrics-box {
+  margin-top: 4px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.9);
+  border-left: 3px solid var(--clover-green); /* 인용 느낌 강조선 */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.lyrics-title {
+  font-size: 0.85rem;
+  margin: 0 0 4px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.lyrics-line {
+  margin: 0;
+  font-size: 0.9rem;
+  font-style: italic; /* 가사 느낌 */
+  color: var(--text-main);
+}
+
+/* =========================================
+   유튜브 링크 버튼
+   ========================================= */
+.song-link {
+  margin-top: 6px;
+}
+
+.song-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
+  box-shadow: 0 8px 20px rgba(107, 191, 122, 0.4);
+}
+
+.song-button:hover {
+  background-color: var(--btn-bg-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(107, 191, 122, 0.5);
+}
+
+.song-button:active {
+  transform: translateY(0);
+  box-shadow: 0 5px 12px rgba(107, 191, 122, 0.4);
+}
+
+/* =========================================
+   FOOTER (내 정보)
+   ========================================= */
+.site-footer {
+  margin-top: 24px;
+  border-top: 1px dashed rgba(108, 117, 100, 0.3);
+  padding-top: 16px;
+}
+
+.about-me {
+  text-align: center;
+}
+
+.about-title {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+  color: var(--clover-dark);
+}
+
+/* 이름/이메일/자기소개 줄 스타일 */
+.about-line {
+  margin: 4px 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* 이메일 링크 색 */
+.about-line a {
+  color: var(--clover-dark);
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(60, 122, 74, 0.5);
+}
+
+.about-line a:hover {
+  border-bottom-style: solid;
+}
+
+/* =========================================
+   기본 p, a 정리
+   ========================================= */
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+/* =========================================
+   반응형 (화면 줄어들 때)
+   ========================================= */
+
+/* 900px 이하: 카드 한 줄로 바꾸기 */
+@media (max-width: 900px) {
+  .page-wrapper {
+    padding: 24px 18px 18px;
+    border-radius: 20px;
+  }
+
+  .songs-section {
+    grid-template-columns: 1fr; /* 두 카드 세로로 정렬 */
+  }
+
+  .song-card {
+    padding: 14px 14px 18px;
+  }
+}
+
+/* 600px 이하: 모바일 크기 조정 */
+@media (max-width: 600px) {
+  body {
+    padding: 12px;
+  }
+
+  .page-wrapper {
+    padding: 20px 14px 14px;
+    border-radius: 18px;
+  }
+
+  .site-title {
+    font-size: 2rem;
+  }
+
+  .site-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .song-header {
+    align-items: flex-start;
+  }
+
+  .song-thumbnail {
+    width: 72px;
+    height: 72px;
+  }
+
+  .song-title {
+    font-size: 1.1rem;
+  }
+
+  .healing-text {
+    font-size: 0.95rem;
+  }
+}
