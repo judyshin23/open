@@ -470,3 +470,84 @@ a {
     font-size: 0.95rem;
   }
 }
+
+/* 1. 네잎클로버 회전 애니메이션 */
+.clover.spin {
+  animation: clover-spin 0.6s ease-out;
+}
+
+@keyframes clover-spin {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.1) rotate(180deg);
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+  }
+}
+
+/* 3. 행운 소나기 떨어지는 이모지들 */
+.falling-item {
+  position: fixed;
+  top: -40px;
+  z-index: 50;
+  animation-name: falling;
+  animation-timing-function: linear;
+  pointer-events: none;
+}
+
+@keyframes falling {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh);
+    opacity: 0;
+  }
+}
+
+/* 4. 마우스 반짝이 */
+.sparkle {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 1), rgba(0, 255, 180, 0.2));
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  animation: sparkle-pop 0.6s ease-out forwards;
+  z-index: 60;
+}
+
+@keyframes sparkle-pop {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.4);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.4);
+  }
+}
+
+/* 버튼도 살짝 예쁘게 (있으면 무시해도 됨) */
+.luck-rain-btn {
+  margin-top: 16px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: none;
+  background: #4caf50;
+  color: #fff;
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.luck-rain-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+}
